@@ -12,7 +12,7 @@ app.component('product-display', {
         
     <div class="product-container">
       <div class="product-image">
-        <img :src="image" />
+        <img :class="{ 'out-of-stock-img': !inStock }" :src="image" />
       </div>
 
       <div class="product-info">
@@ -21,9 +21,14 @@ app.component('product-display', {
         <p v-else>Out of Stock</p>
         <p>Shipping: {{ shipping }}</p>
 
-        <ul>
-          <li v-for="detail in details">{{ detail }}</li>
-        </ul>
+        <div class="container">
+          <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+          </ul>
+          <ul>
+            <li v-for="size in sizes">{{ size }}</li>
+          </ul>
+        </div>
 
         <div class="color-circle"
           v-for="(variant, index) in variants" 
@@ -59,6 +64,7 @@ app.component('product-display', {
       brand: 'Vue Mastery',
       selectedVariant: 0,
       details: ['80% cotton', '20% polyester', 'Gender-neutral'],
+      sizes: ['S', 'M', 'L', 'XL'],
       variants: [
         {
           id: 2234,
